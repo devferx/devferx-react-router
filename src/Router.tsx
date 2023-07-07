@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { Children, isValidElement, useEffect, useState } from "react";
 import { match } from "path-to-regexp";
 
 import { EVENTS } from "./consts";
@@ -10,19 +10,21 @@ type PageComponent = React.ComponentType<{
   routeParams: RouteParams;
 }>;
 
-export interface Route {
+export interface RouteItem {
   path: string;
   Component: PageComponent;
 }
 
 interface RouterProps {
-  routes: Route[];
+  routes: RouteItem[];
   defaultComponent?: PageComponent;
+  children?: React.ReactNode;
 }
 
 export function Router({
   routes = [],
   defaultComponent: DefaultComponent = () => null,
+  children,
 }: RouterProps) {
   const [currentPath, setCurrentPath] = useState(window.location.pathname);
 
@@ -42,7 +44,23 @@ export function Router({
 
   let routeParams = {};
 
-  const Page = routes.find(({ path }) => {
+  // add routes from children <Route /> components
+  const routesFromChildren = Children.map(children, (child) => {
+    if (!isValidElement(child)) return null;
+
+    const props = child.props as RouteItem;
+
+    const { type } = child;
+    const { name } = type as React.FunctionComponent;
+
+    const isRoute = name === "Route";
+
+    return isRoute ? props : null;
+  });
+
+  const routesToUse = routes.concat(routesFromChildren as RouteItem[]);
+
+  const Page = routesToUse.find(({ path }) => {
     if (path === currentPath) return true;
 
     // use path-to-regexp to detect dynamic routes
