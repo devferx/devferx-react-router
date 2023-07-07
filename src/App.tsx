@@ -1,6 +1,7 @@
 import HomePage from "./pages/Home";
 import AboutPage from "./pages/About";
 import NotFoundPage from "./pages/404";
+import SearchPage from "./pages/Search";
 
 import { Route, Router } from "./Router";
 
@@ -16,8 +17,12 @@ const appRoutes: Route[] = [
     Component: AboutPage,
   },
   {
-    path: "/twitch",
-    Component: () => <h1>Nuevo Twitch</h1>,
+    path: "/search/:query",
+    Component: SearchPage,
+  },
+  {
+    path: "/search/:query/:secondQuery",
+    Component: SearchPage,
   },
 ];
 

@@ -7,7 +7,7 @@
 - [x] Create Link component to make it declarative
 - [x] Create Router component to make it more declarative
 - [x] Support default route (404)
-- [] Support routes with parameters
+- [x] Support routes with parameters
 - [] <Route /> component to make it declarative
 - [] Lazy Loading of routes
 - [] Make an i18n with the routes
