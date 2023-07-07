@@ -1,5 +1,6 @@
 import HomePage from "./pages/Home";
 import AboutPage from "./pages/About";
+import NotFoundPage from "./pages/404";
 
 import { Route, Router } from "./Router";
 
@@ -23,7 +24,7 @@ const appRoutes: Route[] = [
 function App() {
   return (
     <main>
-      <Router routes={appRoutes} />
+      <Router routes={appRoutes} defaultComponent={NotFoundPage} />
     </main>
   );
 }

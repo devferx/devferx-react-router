@@ -6,7 +6,7 @@
 - [x] Being able to navigate between pages with the back button
 - [x] Create Link component to make it declarative
 - [x] Create Router component to make it more declarative
-- [] Support default route (404)
+- [x] Support default route (404)
 - [] Support routes with parameters
 - [] <Route /> component to make it declarative
 - [] Lazy Loading of routes
