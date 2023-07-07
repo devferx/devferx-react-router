@@ -1,9 +1,9 @@
 # Devferx React Router
 
-- [] Install the linter
-- [] Create a way to make MPAs (Multiple Page Application)
-- [] Create a way to make SPAs (Single Page Applications)
-- [] Being able to navigate between pages with the back button
+- [x] Install the linter
+- [x] Create a way to make MPAs (Multiple Page Application)
+- [x] Create a way to make SPAs (Single Page Applications)
+- [x] Being able to navigate between pages with the back button
 - [] Create Link component to make it declarative
 - [] Create Router component to make it more declarative
 - [] Support default route (404)

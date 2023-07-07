@@ -1,35 +1,45 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect, useState } from "react";
 
-function App() {
-  const [count, setCount] = useState(0)
+import HomePage from "./pages/Home";
+import AboutPage from "./pages/About";
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+import "./App.css";
+
+enum events {
+  PUSH_STATE = "pushState",
+  POP_STATE = "popstate",
 }
 
-export default App
+export function navigate(href: string) {
+  window.history.pushState({}, "", href);
+  // Create custom event
+  const navigationEvent = new Event(events.PUSH_STATE);
+  window.dispatchEvent(navigationEvent);
+}
+
+function App() {
+  const [currentPath, setCurrentPath] = useState(window.location.pathname);
+
+  useEffect(() => {
+    const onLocationChange = () => {
+      setCurrentPath(window.location.pathname);
+    };
+
+    window.addEventListener(events.PUSH_STATE, onLocationChange);
+    window.addEventListener(events.POP_STATE, onLocationChange);
+
+    return () => {
+      window.removeEventListener(events.PUSH_STATE, onLocationChange);
+      window.removeEventListener(events.POP_STATE, onLocationChange);
+    };
+  }, []);
+
+  return (
+    <main>
+      {currentPath === "/" && <HomePage />}
+      {currentPath === "/about" && <AboutPage />}
+    </main>
+  );
+}
+
+export default App;
