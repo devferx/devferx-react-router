@@ -1,5 +1,6 @@
+import { Suspense, lazy } from "react";
+
 import HomePage from "./pages/Home";
-import AboutPage from "./pages/About";
 import NotFoundPage from "./pages/404";
 import SearchPage from "./pages/Search";
 
@@ -7,6 +8,8 @@ import { RouteItem, Router } from "./Router";
 import { Route } from "./Route";
 
 import "./App.css";
+
+const LazyAboutPage = lazy(() => import("./pages/About"));
 
 const appRoutes: RouteItem[] = [
   {
@@ -17,12 +20,14 @@ const appRoutes: RouteItem[] = [
 
 function App() {
   return (
-    <main>
-      <Router routes={appRoutes} defaultComponent={NotFoundPage}>
-        <Route path="/" Component={HomePage} />
-        <Route path="/about" Component={AboutPage} />
-      </Router>
-    </main>
+    <Suspense fallback={null}>
+      <main>
+        <Router routes={appRoutes} defaultComponent={NotFoundPage}>
+          <Route path="/" Component={HomePage} />
+          <Route path="/about" Component={LazyAboutPage} />
+        </Router>
+      </main>
+    </Suspense>
   );
 }
 

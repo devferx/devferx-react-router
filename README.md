@@ -9,7 +9,7 @@
 - [x] Support default route (404)
 - [x] Support routes with parameters
 - [x] <Route /> component to make it declarative
-- [] Lazy Loading of routes
+- [x] Lazy Loading of routes
 - [] Make an i18n with the routes
 - [] Testing
 - [] Publish the package on NPM
