@@ -1,4 +1,4 @@
-import { navigate } from "../App";
+import { Link } from "../Link";
 
 export default function HomePage() {
   return (
@@ -7,7 +7,7 @@ export default function HomePage() {
       <h1>
         Esta es una pagina de ejemplo para crear un React Router desde cero
       </h1>
-      <button onClick={() => navigate("/about")}>Ir a sobre nosotros</button>
+      <Link to={"/about"}>Ir a sobre nosotros</Link>
     </>
   );
 }

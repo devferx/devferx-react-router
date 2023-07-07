@@ -1,4 +1,4 @@
-import { navigate } from "../App";
+import { Link } from "../Link";
 
 export default function AboutPage() {
   return (
@@ -11,7 +11,7 @@ export default function AboutPage() {
         />
         <p>¡Hola soy Devferx, Frontend Developer!</p>
       </div>
-      <button onClick={() => navigate("/")}>Ir al home</button>
+      <Link to="/">Ir al home</Link>
     </>
   );
 }
