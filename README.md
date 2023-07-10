@@ -10,5 +10,4 @@
 - [x] Support routes with parameters
 - [x] <Route /> component to make it declarative
 - [x] Lazy Loading of routes
-- [] Testing
-- [] Publish the package on NPM
+- [x] Testing
