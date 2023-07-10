@@ -2,6 +2,7 @@ import { Children, isValidElement, useEffect, useState } from "react";
 import { match } from "path-to-regexp";
 
 import { EVENTS } from "./consts";
+import { getCurrentPath } from "./utils/getCurrentPath";
 
 // RouteParams
 export type RouteParams = Record<string, string>;
@@ -16,7 +17,7 @@ export interface RouteItem {
 }
 
 interface RouterProps {
-  routes: RouteItem[];
+  routes?: RouteItem[];
   defaultComponent?: PageComponent;
   children?: React.ReactNode;
 }
@@ -26,7 +27,7 @@ export function Router({
   defaultComponent: DefaultComponent = () => null,
   children,
 }: RouterProps) {
-  const [currentPath, setCurrentPath] = useState(window.location.pathname);
+  const [currentPath, setCurrentPath] = useState(getCurrentPath());
 
   useEffect(() => {
     const onLocationChange = () => {
@@ -58,7 +59,9 @@ export function Router({
     return isRoute ? props : null;
   });
 
-  const routesToUse = routes.concat(routesFromChildren as RouteItem[]);
+  const routesToUse = routes
+    .concat(routesFromChildren as RouteItem[])
+    .filter(Boolean);
 
   const Page = routesToUse.find(({ path }) => {
     if (path === currentPath) return true;

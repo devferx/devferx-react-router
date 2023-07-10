@@ -10,6 +10,5 @@
 - [x] Support routes with parameters
 - [x] <Route /> component to make it declarative
 - [x] Lazy Loading of routes
-- [] Make an i18n with the routes
 - [] Testing
 - [] Publish the package on NPM
